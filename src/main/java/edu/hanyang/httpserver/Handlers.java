@@ -180,7 +180,7 @@ public class Handlers {
         return strbuf.toString();
     }
 
-    @SuppressWarnings("unchecked")
+//    @SuppressWarnings("unchecked")
     public static boolean parseQuery(String query, Map<String, String> parameters) {
 
         if (query != null) {

@@ -1,5 +1,6 @@
 package edu.hanyang.services;
 
+import edu.hanyang.utils.SubmitClassLoader;
 import io.github.hyerica_bdml.indexer.BPlusTree;
 import edu.hanyang.utils.InvertedList;
 
@@ -50,8 +51,8 @@ public class IndexService {
                 int size = raf.readInt();
                 offset += 16 + size;
                 raf.seek(offset);
-                System.out.println("TermID: " + currentWordID);
-                System.out.println("OFFSET: " + offset);
+//                System.out.println("TermID: " + currentWordID);
+//                System.out.println("OFFSET: " + offset);
             }
         } catch (IOException e) {
             e.printStackTrace();

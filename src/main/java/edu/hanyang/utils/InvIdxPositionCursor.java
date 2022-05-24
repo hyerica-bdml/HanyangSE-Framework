@@ -14,13 +14,18 @@ public class InvIdxPositionCursor extends PositionCursor {
     private byte[] buf;
     private ByteBuffer bbuf;
 
-    public InvIdxPositionCursor(String postingListFile,
+    public InvIdxPositionCursor(RandomAccessFile raf,
+                                String postingListFile,
                                 int start,
                                 int end,
                                 int blockSize,
                                 int nBlocks) throws IOException {
 
-        this.raf = new RandomAccessFile(postingListFile, "r");
+        if (raf == null)
+            this.raf = new RandomAccessFile(postingListFile, "r");
+        else
+            this.raf = raf;
+//        this.raf = new RandomAccessFile(postingListFile, "r");
         this.start = start;
         this.end = end;
 

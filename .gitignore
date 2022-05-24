@@ -3,3 +3,5 @@ output/
 *.db
 target/
 tmp/
+data/
+.idea/

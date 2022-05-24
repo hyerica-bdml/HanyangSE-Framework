@@ -111,6 +111,7 @@ public class ExecuteQuery {
                 if (child.termid < 0)
                     throw new Exception("Invalid tree : termid is negative");
                 return new InvIdxDocumentCursor(
+                        null,
                         postingFilePath,
                         DocumentCursor.LIST_TYPE.NONPOSLIST,
                         child.termid,
@@ -129,6 +130,7 @@ public class ExecuteQuery {
 
         else if (node.type == QueryPlanTree.NODE_TYPE.OPRAND) {
             return new InvIdxDocumentCursor(
+                    null,
                     postingFilePath,
                     DocumentCursor.LIST_TYPE.POSLIST,
                     node.termid,

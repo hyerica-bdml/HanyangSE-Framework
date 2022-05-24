@@ -38,6 +38,7 @@ public class InvertedList {
     public DocumentCursor getDocumentCursor(int termId) throws IOException {
         int postingOffset = btree.search(termId);
         return new InvIdxDocumentCursor(
+                null,
                 postingListFile,
                 DocumentCursor.LIST_TYPE.POSLIST,
                 termId,

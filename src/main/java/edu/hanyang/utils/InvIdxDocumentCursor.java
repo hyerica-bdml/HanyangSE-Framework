@@ -18,34 +18,39 @@ public class InvIdxDocumentCursor extends DocumentCursor {
     private int blockSize, nBlocks;
     private int startIndex, endIndex;
 
-    public InvIdxDocumentCursor(String postingListFileName,
+    public InvIdxDocumentCursor(RandomAccessFile raf,
+                                String postingListFileName,
                                 LIST_TYPE type,
                                 int termId,
                                 int postingOffset,
                                 int blockSize,
                                 int nBlocks) {
         try {
+            if (raf == null)
+                this.raf = new RandomAccessFile(postingListFileName, "r");
+            else
+                this.raf = raf;
+
             this.postingListFileName = postingListFileName;
             this.termId = termId;
             this.type = type;
             this.blockSize = blockSize;
             this.nBlocks = nBlocks;
-            raf = new RandomAccessFile(postingListFileName, "r");
 
             offset = postingOffset;
-            raf.seek(offset);
+            this.raf.seek(offset);
 
-            size = raf.readInt();
+            size = this.raf.readInt();
             startIndex = postingOffset + 16;
             endIndex = startIndex + size;
 
-            numOfDocs = raf.readInt();
-            minDocId = raf.readInt();
-            maxDocId = raf.readInt();
+            numOfDocs = this.raf.readInt();
+            minDocId = this.raf.readInt();
+            maxDocId = this.raf.readInt();
             offset += 16;
 
-            currentDocId = raf.readInt();
-            numOfPos = raf.readInt();
+            currentDocId = this.raf.readInt();
+            numOfPos = this.raf.readInt();
         } catch (IOException exc) {
             System.out.println("IOEXCEPTION");
             System.out.println("TermId: " + termId);
@@ -84,6 +89,7 @@ public class InvIdxDocumentCursor extends DocumentCursor {
         int start = offset + 8;
         int end = start + numOfPos * 4;
         return new InvIdxPositionCursor(
+                raf,
                 postingListFileName,
                 start,
                 end,
