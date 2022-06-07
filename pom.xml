@@ -123,7 +123,7 @@
                 </executions>
                 <configuration>
                     <!-- Main Web server -->
-                    <mainClass>edu.hanyang.App</mainClass>
+<!--                    <mainClass>edu.hanyang.App</mainClass>-->
 
                     <executable>java</executable>
                     <includePluginDependencies>true</includePluginDependencies>
