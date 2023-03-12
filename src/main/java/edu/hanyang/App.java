@@ -25,6 +25,7 @@ public class App {
     private BPlusTree btree;
     private QueryProcess qp;
     private String jarFilePath = "lib/HanyangSE-submit-1.0.jar";
+    // private String jarFilePath = "lib/HanyangSE-submit-1.0_proguard_base.jar";
 
     public App() {
 

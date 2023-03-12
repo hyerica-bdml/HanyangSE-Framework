@@ -55,7 +55,7 @@ public class InvertedList {
             return;
         }
 
-        System.out.println("CONSTRUCT TREE");
+//        System.out.println("CONSTRUCT TREE");
         ServiceProvider.getIndexService().constructTreeFromPostingList(
                 btree,
                 postingListFile

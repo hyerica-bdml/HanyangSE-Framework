@@ -11,7 +11,8 @@ import java.nio.file.Paths;
 public class SortApp {
 
     private ExternalSort externalSort;
-    private String jarFilePath = "lib/HanyangSE-submit-1.0.jar";
+    // private String jarFilePath = "lib/HanyangSE-submit-1.0.jar";
+    private String jarFilePath = "lib/HanyangSE-submit-1.0_proguard_base.jar";
 
     public SortApp() {
 

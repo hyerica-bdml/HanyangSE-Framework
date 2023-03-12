@@ -5,37 +5,39 @@ import java.io.FileInputStream;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
+import java.util.jar.JarFile;
 import java.util.jar.JarEntry;
 import java.util.jar.JarInputStream;
 
 public class SubmitClassLoader {
 
-    public static void loadAllSubmitInstance(final String submitJarPath) {
-        File submitJarFile = new File(submitJarPath);
+     public static void loadAllSubmitInstance(final String submitJarPath) {
+         File submitJarFile = new File(submitJarPath);
 
-        if (!submitJarFile.exists()) {
-            System.out.println("Submit jar file is not found!");
-            return;
-        }
+         if (!submitJarFile.exists()) {
+             System.out.println("Submit jar file is not found!");
+             return;
+         }
 
-        try (FileInputStream fin = new FileInputStream(submitJarPath);
-             JarInputStream jarInputStream = new JarInputStream(fin)) {
+         try (FileInputStream fin = new FileInputStream(submitJarPath);
+              JarInputStream jarInputStream = new JarInputStream(fin)) {
 
-            ClassLoader classLoader = new URLClassLoader(new URL[] {
-                    submitJarFile.toURI().toURL()
-            }, Thread.currentThread().getContextClassLoader());
-            List<String> classNames = getClassNamesFromJar(jarInputStream);
+             ClassLoader classLoader = new URLClassLoader(new URL[] {
+                     submitJarFile.toURI().toURL()
+             }, Thread.currentThread().getContextClassLoader());
+             List<String> classNames = getClassNamesFromJar(jarInputStream);
 
-            for (String className: classNames) {
-                Class<?>  cls = Class.forName(className, true, classLoader);
-                cls.newInstance();
-            }
+             for (String className: classNames) {
+                 Class<?>  cls = Class.forName(className, true, classLoader);
+                 cls.newInstance();
+             }
 
-        } catch (Exception exc) {
-//            exc.printStackTrace();
-        }
-    }
+         } catch (Exception exc) {
+ //            exc.printStackTrace();
+         }
+     }
 
     public static <T> T getSubmitInstance(final String submitJarPath, final String className) {
         File submitJarFile = new File(submitJarPath);
